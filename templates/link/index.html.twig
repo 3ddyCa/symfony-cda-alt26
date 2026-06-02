@@ -9,12 +9,20 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Résultats pour {{ Item_type }}! ✅</h1>
+    {% for link in linksList %}
+        <article>
+            <header0>{{link.name}}</header>
+            <img href="{{link.icon}}" alt="illustration du lien">
+            {{link.description}}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Eddyc/Documents/Test_Symfony/symfony-cda-alt26/src/Controller/LinkController.php</code></li>
-        <li>Your template at <code>C:/Users/Eddyc/Documents/Test_Symfony/symfony-cda-alt26/templates/link/index.html.twig</code></li>
-    </ul>
+            Catégories : 
+            {% for cat in link.categories %}
+            {{cat.name}}
+            {% endfor %}
+            <footer>Auteur : {{link.account.firstname}} {{link.account.lastname}}Date d'ajout : {{DateTimeImmutable::createFromFormat('Y-m-d',link.createdAt)}}
+            Lien : {{link.url}}</footer>
+        </article>
+    {% endfor %}
 </div>
 {% endblock %}
