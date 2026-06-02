@@ -2,9 +2,10 @@
 
 namespace App\DataFixtures;
 
+
 use App\Entity\Category;
-use App\Entity\Account;
 use App\Entity\Link;
+use App\Entity\Account;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -15,6 +16,7 @@ class AppFixtures extends Fixture
     public function __construct(
         private readonly UserPasswordHasherInterface $hasher
     ) {}
+
 
     public function load(ObjectManager $manager): void
     {
