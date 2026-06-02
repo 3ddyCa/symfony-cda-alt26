@@ -20,7 +20,7 @@
             {% for cat in link.categories %}
             {{cat.name}}
             {% endfor %}
-            <footer>Auteur : {{link.account.firstname}} {{link.account.lastname}}Date d'ajout : {{DateTimeImmutable::createFromFormat('Y-m-d',link.createdAt)}}
+            <footer>Auteur : {{link.account.firstname}} {{link.account.lastname}}Date d'ajout : {{link.date | date('Y-m-d')}}
             Lien : {{link.url}}</footer>
         </article>
     {% endfor %}

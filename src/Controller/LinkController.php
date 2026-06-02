@@ -26,20 +26,20 @@ final class LinkController extends AbstractController
     public function showAllLink(): Response
     {
         $result = $this->linkRepo->findAll();
-        foreach($result as $key=>$value){
+        /*foreach($result as $key=>$value){
             $value->setCreatedAt(\DateTimeImmutable::createFromFormat('Y-m-d', $value->getCreatedAt()));
-        }
+        }*/
         
         return $this->render('link/index.html.twig', [
             'Item_type' => 'links',
             'linksList' => $result
         ]);
     }
-    #[Route('/linkById', name: 'app_link_Id')]
+    #[Route('/linkById/{id}', name: 'app_link_Id')]
     public function fetchById(int $id): Response
     {
         $result = $this->linkRepo->findById($id);
-        $result->setCreatedAt(\DateTimeImmutable::createFromFormat('Y-m-d', $result->getCreatedAt()));
+        //$result->setCreatedAt(\DateTimeImmutable::createFromFormat('Y-m-d', $result->getCreatedAt()));
         return $this->render('link/index.html.twig', [
             'Item_type' => 'links',
             'linksList' => $result
