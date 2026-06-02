@@ -18,38 +18,42 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Faker\factory::create('fr_FR');
+        $faker = Faker\Factory::create('fr_FR');
 
         //
 
         $categoryIds = [];
-        $category = new Category();
+       
         for ($i = 0; $i <= 100; $i++) {
+             $category = new Category();
             $category->setName($faker->unique()->word());
             array_push($categoryIds, $category);
             $manager->persist($category);
+            
         }
 
         //
 
-        $account = new Account();
+        
         $accountIds = [];
         for ($i = 0; $i <= 10; $i++) {
+            $account = new Account();
             $account->setFirstname($faker->unique()->firstName())
                 ->setLastname($faker->unique()->lastName())
                 ->setEmail($faker->unique()->email())
                 ->setLastname($faker->unique()->name())
                 ->setRoles(['ROLE_USER'])
-                ->setIMG($faker->unique()->image())
+                ->setImg($faker->unique()->imageUrl(96,96))
                 ->setPassword($this->hasher->hashPassword($account, '12345678AA'));
             array_push($accountIds, $account);
             $manager->persist($account);
         }
-        $link = new Link();
+        
         for ($i = 0; $i <= 20; $i++) {
+            $link = new Link();
             $link->setUrl($faker->unique()->name())
-                ->setUrl($faker->unique()->name())
-                ->setIcon($faker->unique()->name())
+                ->setUrl($faker->unique()->url())
+                ->setIcon($faker->unique()->imageUrl(24,24))
                 ->setName($faker->unique()->name())
                 ->setCreatedAt(\DateTimeImmutable::createFromFormat('Y-m-d', $faker->date()))
                 ->setAccount($accountIds[rand(1, count($accountIds) - 1)]);
@@ -57,7 +61,10 @@ class AppFixtures extends Fixture
                 $link->addCategory($categoryIds[rand(1, count($categoryIds) - 1)]);
             }
             $manager->persist($link);
+
         }
+$manager->flush();
+       
         //
     }
 }
